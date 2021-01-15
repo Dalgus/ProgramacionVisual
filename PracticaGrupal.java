@@ -3,8 +3,6 @@ package prac8c.java;
 import java.util.Scanner;
 import java.io.*;
 import java.util.InputMismatchException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 class Potion implements Serializable{
@@ -19,175 +17,10 @@ class Item implements Serializable{
 
 
 public class Prac8CJava {
-    
-    
-    public static void buscar (Potion[] pocion , Item[] items){
-       Scanner ent= new Scanner (System.in); 
-       //variables para recoger los numeros por teclado
-       int op, num;
-        System.out.println("------------------------------");
-        do{
-        System.out.println("¿Qué deseas buscar?:1- Pocima, 2- Item ");
-        op=ent.nextInt();
-    }while(op<1 || op>2);
-        
-      if(op==1){
-      
-          System.out.println("Por favor, introduce una posicion existente para la lista seleccionada.");
-          num=ent.nextInt();
-          //se muestra la pocima del espacio que introducimos por teclado
-          System.out.println("Id: "+pocion[num].id);
-          System.out.println("Nombre: "+pocion[num].nombre);
-          System.out.println("Descripcion: "+pocion[num].description);
-          System.out.println("Tipo: "+pocion[num].type);
-          System.out.println("Experiencia: "+pocion[num].points);
-          
-          
-     }else if(op==2){
-          System.out.println("Por favor, introduce una posicion existente para la lista seleccionada.");
-          num=ent.nextInt();
-          //se muestra el item del espacio que introducimos por teclado
-          System.out.println("Id: "+items[num].id);
-          System.out.println("Nombre: "+items[num].name);
-          System.out.println("Descripcion: "+items[num].description);
-          System.out.println("Tipo: "+items[num].type);
-          System.out.println("Experiencia: "+items[num].experience);
-     
-     }
-        
 
-
-
-}
-    
-    public static void modificarPuntos (Potion[] pocion, Item[] items){
-    Scanner ent = new Scanner (System.in);
-    int cambio;
-    final int EXPERIENCE=10;
-        System.out.println("-------------------------");
-        do{
-            
-        System.out.println("¿Cuantos puntos de bonificación quieres?(1-10)");
-        cambio = ent.nextInt();
-        
-        }while(cambio<0 || cambio>EXPERIENCE);//para que no pueda subir mas de 10 niveles
-        
-        for(int i = 0; i <= 5; i++ ){
-         if(items[i]!=null){ //para que no haya fallo si hay algun espacio en blanco
-        //guardo en la experiencia de los items el cambio introducido por teclado    
-        items[i].experience =items[i].experience +cambio;
-        
-        if(items[i].experience>50){
-            
-        items[i].experience=50;
-        
-        }}}
-        
-      for(int i = 0; i <= 10; i++ ){
-        if(pocion[i]!=null){
-        //lo mismo que con los items    
-        pocion[i].points =pocion[i].points +cambio;
-        
-        if(pocion[i].points>35){
-            
-        pocion[i].points=35;//establecer como maximo 35 puntos
-        }
-        }
-        }
-        System.out.println("Has modificado los puntos de los items y de las pociones en un" + cambio);
-    
-    }
-
-    public static void guardarFicehros (Potion[] pocion, Item[] items)  {
-    Scanner ent = new Scanner (System.in);
-    //establezco las constantes para no salirme del array
-    final int MAXPOTIONS=10;
-    final int MAXITEMS=5;
-    int selec;
-    
-        System.out.println("-----------------------");
-        do{
-        System.out.println("¿Que desea guardar?:1-Pocimas, 2-Items, 3-Ambos");
-        selec= ent.nextInt();
-        }while(selec<1 || selec>3);
-        
-        if(selec==1){
-            try{
-              //creo el fichero de texto pjpocimas  
-             PrintStream pocimas;
-             pocimas = new PrintStream(new FileOutputStream("pjpocimas.txt"));
-             //recorro el registro en la posicion i, y los escribo en el .txt que he creado
-             for(int i=0; i<MAXPOTIONS; i++){
-                if(pocion[i]!=null){ 
-                pocimas.println("Id: "+pocion[i].id);
-                pocimas.println("Nombre: "+pocion[i].nombre);
-                pocimas.println("Descripcion: "+pocion[i].description);
-                pocimas.println("Tipo: "+pocion[i].type);
-                pocimas.println("Experiencia: "+pocion[i].points);
-                pocimas.println("------------------");
-                }
-               }
-            }
-            catch(FileNotFoundException e){
-                System.out.println("Fichero no encontrado");
-            }
-            
-        }else if(selec==2){
-            try{
-            //mismo porceso que en las pocimas  
-            PrintStream it;
-             it= new PrintStream(new FileOutputStream("pjitems.txt"));
-             
-             for(int i=0; i<MAXITEMS; i++){
-                if(items[i]!=null){ 
-                it.println("Id: "+items[i].id);
-                it.println("Nombre: "+items[i].name);
-                it.println("Descripcion: "+items[i].description);
-                it.println("Tipo: "+items[i].type);
-                it.println("Experiencia: "+items[i].experience);
-                it.println("--------------------");
-                }
-            }
-            }
-            catch(FileNotFoundException e){
-                System.out.println("Fichero no encontrado");
-            }
-        }else if(selec==3){
-            try{
-             //mismo proceso pero con ambos   
-             PrintStream ambos;
-             ambos = new PrintStream(new FileOutputStream("pjambos.txt"));
-             
-             for(int i=0; i<MAXPOTIONS; i++){
-                if(pocion[i]!=null){ 
-                ambos.println("Id: "+pocion[i].id);
-                ambos.println("Nombre: "+pocion[i].nombre);
-                ambos.println("Descripcion: "+pocion[i].description);
-                ambos.println("Tipo: "+pocion[i].type);
-                ambos.println("Experiencia: "+pocion[i].points);
-                }}
-                
-                ambos.println("---------------");
-                
-             for(int i=0; i<MAXITEMS; i++){
-                if(items[i]!=null){ 
-                ambos.println("Id: "+items[i].id);
-                ambos.println("Nombre: "+items[i].name);
-                ambos.println("Descripcion: "+items[i].description);
-                ambos.println("Tipo: "+items[i].type);
-                ambos.println("Experiencia: "+items[i].experience);
-                }
-        }}
-          catch(FileNotFoundException e){
-                System.out.println("Fichero no encontrado");
-          }catch(IOException exc){
-                System.out.println("Fichero bien leido");
-            }   
-         
-    }}         
-    
-    
-    
+    /**
+     * @param args the command line arguments
+     */
     public static void main(String[] args) {
         final int MAXPOTIONS = 10;
         final int MAXITEMS = 5;
@@ -220,8 +53,7 @@ public class Prac8CJava {
             System.out.println("10. Cargar última partida desde texto.");
             System.out.println("11. Guardar pócimas e ítems a disco.");
             System.out.println("12. Cargar pócimas e ítems desde disco.");
-            System.out.println("13. Mostrar puntos de un tipo de pócima.");
-            System.out.println("14. Terminar");
+            System.out.println("13. Terminar");
             
             opción = entrada.nextInt();
         
@@ -262,28 +94,36 @@ public class Prac8CJava {
             case 12:
                 System.out.println("Menú:");
                 break;
-            case 13:
-                System.out.println("Menú:");
-                break;
             default:
                 System.out.println("Menú:");
             }
-        } while (opción != 14);
+        } while (opción != 13);
     }
     
     public static void insertarPocimaEItem (Potion[] pocion, Item [] items){
         Scanner entrada = new Scanner (System.in);
         System.out.println("-----------INSERTAR PÓCIMA O ITEM-------------------");
         int opcion;
-        do{    
+        // Ponemos un do...while para que nos pregunte si queremos insertar más pócimas o items.
+        do{ 
+            // Creamos una instrucción if...else if para escoger que tipo de objeto queremos introducir
             System.out.println("¿Qué quieres introducir? 1. Pócimas, 2. Items");
             opcion = entrada.nextInt();
             if ((opcion == 1)){
+                // Ponemos un if...else para que el jugador no introduzca más de 10 pócimas 
                 if ((contarPociones(pocion) < pocion.length)){ 
+                    // Declaramos una variable de tipo entero y la igualamos al método ContarPociones para que vaya incremetando una 
+                    // posición en el array cada vez que queramos introducir una pócima.
                     int pocionesExistentes = contarPociones(pocion);
                     pocion[pocionesExistentes] = new Potion();
+                    // Declaramos una variable de tipo booleana (false) y a continuación la utilizamos en un bucle do..while para que se repita
+                    // el proceso con el fin de evitar que dos ID tengan el mismo valor numérico.
                     boolean existe = false;
                     do{
+                        // Declaramos otra variable booleana (false) para utilizarla en la siguiente iteración do...while, para que se repita 
+                        // costantemente en el caso de que el jugador introduzca un dato que no sea de tipo int.
+                        // Como medida para evitar que el programa se pare en caso de introducir un dato incorrecto (no int) utilizamos un try...catch.
+                        // Este algoritmo lo utilizaremos cada vez que el programa nos pida un valor de tipo int.
                         boolean identificadorIncorrecto = false;
                         do{
                             try{
@@ -308,6 +148,7 @@ public class Prac8CJava {
                         try{
                             System.out.println("Introduzca el tipo de pócima: 1 -> Vida, 2 -> Magia, 3 -> Veneno");
                             pocion[pocionesExistentes].type = entrada.nextInt();
+                            // Utilizamos un bucle while para que nos pida una y otra vez el tipo de pócima en caso de que no sea 1, 2 o 3.
                             while (pocion[pocionesExistentes].type < 1 || 3 < pocion[pocionesExistentes].type){
                                 System.out.println("Error, el número insertado no coincide con ningún tipo, vuelve a intentarlo.");
                                 System.out.println("Introduzca el tipo de pócima: 1 -> Vida, 2 -> Magia, 3 -> Veneno");
@@ -328,6 +169,7 @@ public class Prac8CJava {
                         try{    
                             System.out.println("Introduzca el valor de los puntos.");
                             pocion[pocionesExistentes].points = entrada.nextInt();
+                            // Utilizamos un bucle while para que nos pida una y otra vez el valor de los puntos en caso de ignorar el intervalo establecido.
                             while (pocion[pocionesExistentes].points < 5 || 35 < pocion[pocionesExistentes].points){
                                 System.out.println("Error, introduce un número que esté en el intevalo [5, 35].");
                                 System.out.println("Introduzca el valor de los puntos.");                        
@@ -341,11 +183,13 @@ public class Prac8CJava {
                             puntosIncorrectos = true;
                         }
                     }while(puntosIncorrectos);
+                    // Si tenemos ya 10 pócimas, saltará la instrucción else.
                 } else  {
                     System.out.println("Ya has insertado 10 pócimas, usa una pócima para añadir más.");
                 }
-            }
-            
+            } // Fin de if.
+                
+            // Para los ítems, realizamos exactamente el mismo procedimiento empleado para las pócimas.
             else if ((opcion == 2)){
                 if (contarItems(items) < items.length){
                     int objetosEspeciales = contarItems(items);
@@ -418,7 +262,7 @@ public class Prac8CJava {
             }
             System.out.println("-------------------------------------------");
             System.out.println("¿Quieres añadir algo más? 1. SÍ, 2. NO");
-        } while (entrada.nextInt() == 1);
+        } while (entrada.nextInt() == 1); // Fin do...while
     } 
     
     public static void posicionDeterminada(Potion[] pocion, Item[] items ){
@@ -426,8 +270,12 @@ public class Prac8CJava {
        System.out.println("---------------INSERTAR POCIMA O ITEM EN POSICION DETERMINADA--------------");
        System.out.println("¿Cuál es tu raza de personaje? 1: Humano, 2: Orco, 3: Elfo, 4: Enano");
        int raza = entrada.nextInt();
+       // Ponemos una condición if...else para que salte una instrucción u otra dependiendo de la raza del personaje.
        if (raza == 3 || raza == 4){
             int opcion;
+            // Utilizamos exactamente el mismo algoritmo del método anterior con la diferencia de que al final creamos un pequeño algoritmo
+            // para que el jugador tenga la libertad de insertar las pócimas o items en la posición que quiera, desplazando las demás una posición a 
+            // la derecha.
             do{    
                 System.out.println("¿Qué quieres introducir? 1. Pócimas, 2. Items");
                 opcion = entrada.nextInt();
@@ -435,6 +283,7 @@ public class Prac8CJava {
                     if ((contarPociones(pocion) < pocion.length)){
                         int pocionesExistentes = contarPociones(pocion);
                         pocion[pocionesExistentes] = new Potion();
+                        // Creamos un objeto y, como he explicado antes, utilizamos el mismo algoritmo que el del método anterior.
                         Potion nuevaPocion = new Potion();
                         boolean existe = false;
                         do{
@@ -496,21 +345,28 @@ public class Prac8CJava {
                             }
                         }while(puntosIncorrectos);
                         
+                        // Preguntamos en que posición queremos insertar la pócima.
                         System.out.println("¿En qué posición quieres insertar la nueva pócima? (entre 1 y " + contarPociones(pocion) + ")");
                         int posicion = entrada.nextInt();
+                        // Usamos un while para evitar que el jugador inserte la pócima en una posición vacía.
                         while (posicion < 1 || posicion > contarPociones(pocion)){
                             System.out.println("Error, inserta un número comprendido en el intervalo [1, " + contarPociones(pocion) + "]");
                             posicion = entrada.nextInt();
                         }
+                        // A continuación programamos un bucle for para que vaya desplazando las pócimas una posición a la derecha hasta la 
+                        // posición que hemos introducido por teclado.
                         for (int i = (contarPociones(pocion) - 2); i >= (posicion - 1); i--){
                             pocion[i + 1] = pocion[i];
                         }
+                        // Le asignamos al objeto, que hemos creado al principio, la posición que previamente habíamos introducido por teclado.
                         pocion[posicion - 1] = nuevaPocion;
+                        // Si ya tenemos 10 pócimas se ejecutará la instrucción else.
                     } else  {
                         System.out.println("Ya has insertado 10 pócimas, usa una pócima para añadir más.");
                     }
                 }
                 
+                // Utilizamos el mismo pseudocódigo para los ítems.
                 else if ((opcion == 2)){
                     if ((contarItems(items) < items.length)){ 
                         int objetosEspeciales = contarItems(items);
@@ -600,6 +456,12 @@ public class Prac8CJava {
        }
     }
     
+//    Creamos un método de tipo int para que devuelva el número de pócimas insertadas (tope).
+//    Para ello insertamos como parámetros de entrada el array Potion.
+//    A continuación declaramos la variable boundPotions y la inicializamos a 0. Creamos un bucle for 
+//    para que recorra el array hasta el tamaño de su longitud y dentro creamos una instrucción if para 
+//    que vaya incrementando + 1 la variable boundPotions (tope) cada vez que introducimos un elemento nuevo en el array.
+//    Por último retornamos el tope.
     public static int contarPociones(Potion[] pocion){
         int boundPotions = 0;
         for (int i = 0; i < pocion.length; i++){
@@ -610,6 +472,7 @@ public class Prac8CJava {
        return boundPotions;
     }
     
+//    Hacemos exactamente el mismo algoritmo para contar el número de ítems introducidos.
     public static int contarItems(Item[] items){
         int boundItems = 0;
         for (int i = 0; i < items.length; i++){
@@ -620,6 +483,14 @@ public class Prac8CJava {
        return boundItems;
     }
     
+    //    Hacemos un método para quitar los pócimas que queramos del array.
+    //    Para ello creamos una condición if...else para que salte la instrucción 
+    //    else si no tenemos ninguna pócima en el array.
+    //    Después declaramos dos variables de tipo entero. El tope que es la cantidad de pócimas insertadas - 1 y la posición que
+    //    es igual a 0, porque queremos eliminar siempre la 1ª pócima.
+    //    Creamos un bucle for para que vaya desplazando las pócimas no usadas a un índice inferior del que tenían originalmente. 
+    //    La última posición que es el tope la eliminamos porque no la necesitamos.
+    //    Creamos otra condición if...else para que salte un mensaje según la cantidad de pócimas que tenga almacenadas el jugador.
     public static void usarPócima(Potion[] pocion){
         System.out.println("-------------------USAR PÓCIMA------------------");
         if(contarPociones(pocion) > 0){
@@ -640,6 +511,9 @@ public class Prac8CJava {
         }
     }
     
+    //  Este método sirve para evitar introducir dos identificadores con el mismo número.
+    // Creamos un bucle for que va recorriendo el array y dentro ponemos una condición if que lo que hace es identificar si hay dos 
+    // pócimas o ítems con el mismo ID.
     public static boolean existeIdPocimas (int pociones, Potion[] pocion){
         for(int i = 0; i < pociones; i++){
             if (pocion[i].id == pocion[pociones].id){
@@ -650,6 +524,9 @@ public class Prac8CJava {
         return false;
     }
     
+    //  Este método sirve para evitar introducir dos identificadores con el mismo número.
+    // Creamos un bucle for que va recorriendo el array y dentro ponemos una condición if que lo que hace es identificar si hay dos 
+    // pócimas o ítems con el mismo ID.
     public static boolean existeIdPocimas2 (int pociones, Potion nuevaPocion, Potion[] pocion){
         for(int i = 0; i < pociones; i++){
             if (pocion[i].id == nuevaPocion.id){
@@ -660,6 +537,9 @@ public class Prac8CJava {
         return false;
     }
     
+    //  Este método sirve para evitar introducir dos identificadores con el mismo número.
+    // Creamos un bucle for que va recorriendo el array y dentro ponemos una condición if que lo que hace es identificar si hay dos 
+    // pócimas o ítems con el mismo ID.
     public static boolean existeIdItems (int objetosEspeciales, Item[] items){
         for(int i = 0; i < objetosEspeciales; i++){
             if (items[i].id == items[objetosEspeciales].id){
@@ -670,6 +550,9 @@ public class Prac8CJava {
         return false;
     }
     
+    //  Este método sirve para evitar introducir dos identificadores con el mismo número.
+    // Creamos un bucle for que va recorriendo el array y dentro ponemos una condición if que lo que hace es identificar si hay dos 
+    // pócimas o ítems con el mismo ID.
     public static boolean existeIdItems2 (int objetosEspeciales, Item nuevoItem, Item[] items){
         for(int i = 0; i < objetosEspeciales; i++){
             if (items[i].id == nuevoItem.id){
@@ -678,5 +561,166 @@ public class Prac8CJava {
             }
         }
         return false;
+    }
+    
+    public static void buscar (Potion[] pocion , Item[] items){
+        Scanner ent= new Scanner (System.in); 
+        //variables para recoger los numeros por teclado
+        int op, num;
+        System.out.println("------------------------------");
+        do{
+           System.out.println("¿Qué deseas buscar?:1- Pocima, 2- Item ");
+           op=ent.nextInt();
+        }while(op<1 || op>2);
+        
+        if(op==1){
+            System.out.println("Por favor, introduce una posicion existente para la lista seleccionada.");
+            num=ent.nextInt();
+            while (num < 1 || num > contarPociones(pocion)){
+                System.out.println("Error, inserta un número comprendido en el intervalo [1, " + contarPociones(pocion) + "]");
+                num = ent.nextInt();
+            }
+            //se muestra la pocima del espacio que introducimos por teclado
+            System.out.println("Id: "+pocion[num - 1].id);
+            System.out.println("Nombre: "+pocion[num - 1].nombre);
+            System.out.println("Descripcion: "+pocion[num - 1].description);
+            System.out.println("Tipo: "+pocion[num - 1].type);
+            System.out.println("Experiencia: "+pocion[num - 1].points);
+        }else if(op==2){
+            System.out.println("Por favor, introduce una posicion existente para la lista seleccionada.");
+            num=ent.nextInt();
+            while (num < 1 || num > contarItems(items)){
+                System.out.println("Error, inserta un número comprendido en el intervalo [1, " + contarItems(items) + "]");
+                num = ent.nextInt();
+            }
+            //se muestra el item del espacio que introducimos por teclado
+            System.out.println("Id: "+items[num - 1].id);
+            System.out.println("Nombre: "+items[num - 1].name);
+            System.out.println("Descripcion: "+items[num - 1].description);
+            System.out.println("Tipo: "+items[num - 1].type);
+            System.out.println("Experiencia: "+items[num - 1].experience);
+        }
+    }
+    
+    public static void modificarPuntos (Potion[] pocion, Item[] items){
+        Scanner ent = new Scanner (System.in);
+        int cambio;
+        final int EXPERIENCE=10;
+        System.out.println("-------------------------");
+        do{
+            System.out.println("¿Cuantos puntos de bonificación quieres?(1-10)");
+            cambio = ent.nextInt();
+        }while(cambio<0 || cambio>EXPERIENCE);//para que no pueda subir mas de 10 niveles
+        
+        for(int i = 0; i < items.length; i++ ){
+            if(items[i]!=null){ 
+                //para que no haya fallo si hay algun espacio en blanco
+                //guardo en la experiencia de los items el cambio introducido por teclado    
+                items[i].experience =items[i].experience +cambio;
+                if(items[i].experience>50){
+                    items[i].experience=50;
+                }
+            }
+        }
+        
+        for(int i = 0; i < pocion.length; i++ ){
+            if(pocion[i]!=null){
+                //lo mismo que con las pociones    
+                pocion[i].points = pocion[i].points + cambio;
+                if(pocion[i].points>35){
+                    pocion[i].points=35;//establecer como maximo 35 puntos
+                }
+            }
+        }
+        System.out.println("Has modificado los puntos de los items y de las pociones con " + cambio + " puntos más.");
+    }
+    
+    public static void guardarFicehros (Potion[] pocion, Item[] items)  {
+        Scanner ent = new Scanner (System.in);
+        //establezco las constantes para no salirme del array
+        final int MAXPOTIONS=10;
+        final int MAXITEMS=5;
+        int selec;
+    
+        System.out.println("-----------------------");
+        do{
+        System.out.println("¿Que desea guardar?:1-Pocimas, 2-Items, 3-Ambos");
+        selec= ent.nextInt();
+        }while(selec<1 || selec>3);
+        
+        if(selec==1){
+            try{
+                //creo el fichero de texto pjpocimas  
+                PrintStream pocimas;
+                pocimas = new PrintStream(new FileOutputStream("pjpocimas.txt"));
+                //recorro el registro en la posicion i, y los escribo en el .txt que he creado
+                for(int i=0; i<MAXPOTIONS; i++){
+                    if(pocion[i]!=null){ 
+                        pocimas.println("Id: "+pocion[i].id);
+                        pocimas.println("Nombre: "+pocion[i].nombre);
+                        pocimas.println("Descripcion: "+pocion[i].description);
+                        pocimas.println("Tipo: "+pocion[i].type);
+                        pocimas.println("Experiencia: "+pocion[i].points);
+                        pocimas.println("------------------");
+                    }
+                }
+            }
+            catch(FileNotFoundException e){
+                System.out.println("Fichero no encontrado");
+            }
+            
+        }else if(selec==2){
+            try{
+            //mismo porceso que en las pocimas  
+                PrintStream it;
+                it= new PrintStream(new FileOutputStream("pjitems.txt"));
+             
+                for(int i=0; i<MAXITEMS; i++){
+                    if(items[i]!=null){ 
+                        it.println("Id: "+items[i].id);
+                        it.println("Nombre: "+items[i].name);
+                        it.println("Descripcion: "+items[i].description);
+                        it.println("Tipo: "+items[i].type);
+                        it.println("Experiencia: "+items[i].experience);
+                        it.println("--------------------");
+                    }
+                }
+            }
+            catch(FileNotFoundException e){
+                System.out.println("Fichero no encontrado");
+            }
+        }else if(selec==3){
+            try{
+                //mismo proceso pero con ambos   
+                PrintStream ambos;
+                ambos = new PrintStream(new FileOutputStream("pjambos.txt"));
+             
+                for(int i=0; i<MAXPOTIONS; i++){
+                    if(pocion[i]!=null){ 
+                        ambos.println("Id: "+pocion[i].id);
+                        ambos.println("Nombre: "+pocion[i].nombre);
+                        ambos.println("Descripcion: "+pocion[i].description);
+                        ambos.println("Tipo: "+pocion[i].type);
+                        ambos.println("Experiencia: "+pocion[i].points);
+                    }
+                }
+                ambos.println("---------------");
+                
+                for(int i=0; i<MAXITEMS; i++){
+                    if(items[i]!=null){ 
+                        ambos.println("Id: "+items[i].id);
+                        ambos.println("Nombre: "+items[i].name);
+                        ambos.println("Descripcion: "+items[i].description);
+                        ambos.println("Tipo: "+items[i].type);
+                        ambos.println("Experiencia: "+items[i].experience);
+                    }
+                }
+            }
+            catch(FileNotFoundException e){
+                System.out.println("Fichero no encontrado");
+            }catch(IOException exc){
+                System.out.println("Fichero bien leido");
+            }
+        }
     }
 }
