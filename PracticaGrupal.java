@@ -95,7 +95,7 @@ public class Prac8CJava {
                 System.out.println("Menú:");
                 break;
             default:
-                System.out.println("Menú:");
+                System.out.println("¡¡HASTA PRONTO!!");
             }
         } while (opción != 13);
     }
