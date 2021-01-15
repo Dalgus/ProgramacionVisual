@@ -3,6 +3,8 @@ package prac8c.java;
 import java.util.Scanner;
 import java.io.*;
 import java.util.InputMismatchException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 class Potion implements Serializable{
@@ -17,10 +19,175 @@ class Item implements Serializable{
 
 
 public class Prac8CJava {
+    
+    
+    public static void buscar (Potion[] pocion , Item[] items){
+       Scanner ent= new Scanner (System.in); 
+       //variables para recoger los numeros por teclado
+       int op, num;
+        System.out.println("------------------------------");
+        do{
+        System.out.println("¿Qué deseas buscar?:1- Pocima, 2- Item ");
+        op=ent.nextInt();
+    }while(op<1 || op>2);
+        
+      if(op==1){
+      
+          System.out.println("Por favor, introduce una posicion existente para la lista seleccionada.");
+          num=ent.nextInt();
+          //se muestra la pocima del espacio que introducimos por teclado
+          System.out.println("Id: "+pocion[num].id);
+          System.out.println("Nombre: "+pocion[num].nombre);
+          System.out.println("Descripcion: "+pocion[num].description);
+          System.out.println("Tipo: "+pocion[num].type);
+          System.out.println("Experiencia: "+pocion[num].points);
+          
+          
+     }else if(op==2){
+          System.out.println("Por favor, introduce una posicion existente para la lista seleccionada.");
+          num=ent.nextInt();
+          //se muestra el item del espacio que introducimos por teclado
+          System.out.println("Id: "+items[num].id);
+          System.out.println("Nombre: "+items[num].name);
+          System.out.println("Descripcion: "+items[num].description);
+          System.out.println("Tipo: "+items[num].type);
+          System.out.println("Experiencia: "+items[num].experience);
+     
+     }
+        
 
-    /**
-     * @param args the command line arguments
-     */
+
+
+}
+    
+    public static void modificarPuntos (Potion[] pocion, Item[] items){
+    Scanner ent = new Scanner (System.in);
+    int cambio;
+    final int EXPERIENCE=10;
+        System.out.println("-------------------------");
+        do{
+            
+        System.out.println("¿Cuantos puntos de bonificación quieres?(1-10)");
+        cambio = ent.nextInt();
+        
+        }while(cambio<0 || cambio>EXPERIENCE);//para que no pueda subir mas de 10 niveles
+        
+        for(int i = 0; i <= 5; i++ ){
+         if(items[i]!=null){ //para que no haya fallo si hay algun espacio en blanco
+        //guardo en la experiencia de los items el cambio introducido por teclado    
+        items[i].experience =items[i].experience +cambio;
+        
+        if(items[i].experience>50){
+            
+        items[i].experience=50;
+        
+        }}}
+        
+      for(int i = 0; i <= 10; i++ ){
+        if(pocion[i]!=null){
+        //lo mismo que con los items    
+        pocion[i].points =pocion[i].points +cambio;
+        
+        if(pocion[i].points>35){
+            
+        pocion[i].points=35;//establecer como maximo 35 puntos
+        }
+        }
+        }
+        System.out.println("Has modificado los puntos de los items y de las pociones en un" + cambio);
+    
+    }
+
+    public static void guardarFicehros (Potion[] pocion, Item[] items)  {
+    Scanner ent = new Scanner (System.in);
+    //establezco las constantes para no salirme del array
+    final int MAXPOTIONS=10;
+    final int MAXITEMS=5;
+    int selec;
+    
+        System.out.println("-----------------------");
+        do{
+        System.out.println("¿Que desea guardar?:1-Pocimas, 2-Items, 3-Ambos");
+        selec= ent.nextInt();
+        }while(selec<1 || selec>3);
+        
+        if(selec==1){
+            try{
+              //creo el fichero de texto pjpocimas  
+             PrintStream pocimas;
+             pocimas = new PrintStream(new FileOutputStream("pjpocimas.txt"));
+             //recorro el registro en la posicion i, y los escribo en el .txt que he creado
+             for(int i=0; i<MAXPOTIONS; i++){
+                if(pocion[i]!=null){ 
+                pocimas.println("Id: "+pocion[i].id);
+                pocimas.println("Nombre: "+pocion[i].nombre);
+                pocimas.println("Descripcion: "+pocion[i].description);
+                pocimas.println("Tipo: "+pocion[i].type);
+                pocimas.println("Experiencia: "+pocion[i].points);
+                pocimas.println("------------------");
+                }
+               }
+            }
+            catch(FileNotFoundException e){
+                System.out.println("Fichero no encontrado");
+            }
+            
+        }else if(selec==2){
+            try{
+            //mismo porceso que en las pocimas  
+            PrintStream it;
+             it= new PrintStream(new FileOutputStream("pjitems.txt"));
+             
+             for(int i=0; i<MAXITEMS; i++){
+                if(items[i]!=null){ 
+                it.println("Id: "+items[i].id);
+                it.println("Nombre: "+items[i].name);
+                it.println("Descripcion: "+items[i].description);
+                it.println("Tipo: "+items[i].type);
+                it.println("Experiencia: "+items[i].experience);
+                it.println("--------------------");
+                }
+            }
+            }
+            catch(FileNotFoundException e){
+                System.out.println("Fichero no encontrado");
+            }
+        }else if(selec==3){
+            try{
+             //mismo proceso pero con ambos   
+             PrintStream ambos;
+             ambos = new PrintStream(new FileOutputStream("pjambos.txt"));
+             
+             for(int i=0; i<MAXPOTIONS; i++){
+                if(pocion[i]!=null){ 
+                ambos.println("Id: "+pocion[i].id);
+                ambos.println("Nombre: "+pocion[i].nombre);
+                ambos.println("Descripcion: "+pocion[i].description);
+                ambos.println("Tipo: "+pocion[i].type);
+                ambos.println("Experiencia: "+pocion[i].points);
+                }}
+                
+                ambos.println("---------------");
+                
+             for(int i=0; i<MAXITEMS; i++){
+                if(items[i]!=null){ 
+                ambos.println("Id: "+items[i].id);
+                ambos.println("Nombre: "+items[i].name);
+                ambos.println("Descripcion: "+items[i].description);
+                ambos.println("Tipo: "+items[i].type);
+                ambos.println("Experiencia: "+items[i].experience);
+                }
+        }}
+          catch(FileNotFoundException e){
+                System.out.println("Fichero no encontrado");
+          }catch(IOException exc){
+                System.out.println("Fichero bien leido");
+            }   
+         
+    }}         
+    
+    
+    
     public static void main(String[] args) {
         final int MAXPOTIONS = 10;
         final int MAXITEMS = 5;
@@ -78,13 +245,13 @@ public class Prac8CJava {
                 System.out.println("Menú:");
                 break;
             case 7:
-                System.out.println("Menú:");
+                buscar(pocima, elemento);
                 break;
             case 8:
-                System.out.println("Menú:");
+                modificarPuntos(pocima, elemento);
                 break;
             case 9:
-                System.out.println("Menú:");
+                guardarFicehros(pocima,elemento);
                 break;
             case 10:
                 System.out.println("Menú:");
