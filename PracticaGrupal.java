@@ -388,7 +388,7 @@ public class PracticaGrupal {
                     int points = 0;
                     if ((contarPociones(pocion) < pocion.length)) {
                         int pocionesExistentes = contarPociones(pocion);
-                        //pocion[pocionesExistentes] = new Potion();
+                        pocion[pocionesExistentes] = new Potion(name, description, id, type, points);
                         // Creamos un objeto y, como he explicado antes, utilizamos el mismo algoritmo que el del método anterior.
                         Potion nuevaPocion = new Potion(name, description, id, type, points);
                         boolean existe = false;
