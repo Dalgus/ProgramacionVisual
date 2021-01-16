@@ -409,6 +409,7 @@ public class PracticaGrupal {
                         } while (existe);
                         System.out.println("Introduzca el nombre de la pócima.");
                         nuevaPocion.name = entrada.nextLine();
+                        nuevaPocion.name = entrada.nextLine();
                         System.out.println("Introduzca la descripción de la pócima.");
                         nuevaPocion.description = entrada.nextLine();
                         boolean tipoIncorrecto = false;
@@ -496,6 +497,7 @@ public class PracticaGrupal {
                             existe2 = existeIdItems2(objetosEspeciales, nuevoItem, items);
                         } while (existe2);
                         System.out.println("Introduzca el nombre del item.");
+                        nuevoItem.name = entrada.nextLine();
                         nuevoItem.name = entrada.nextLine();
                         System.out.println("Introduzca la descripción del item.");
                         nuevoItem.description = entrada.nextLine();
