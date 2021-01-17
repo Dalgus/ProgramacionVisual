@@ -167,7 +167,7 @@ public class PracticaGrupal {
                     mostrarPocimaEItem(pocima, elemento);
                     break;
                 case 6:
-                    mostrarItemsOrdenados(elemento,pocima);
+                    mostrarItemsOrdenados(elemento, pocima);
                     break;
                 case 7:
                     buscar(pocima, elemento);
@@ -669,77 +669,76 @@ public class PracticaGrupal {
         return false;
     }
 
-    public static void tirarItem(Item[] items, Scanner entrada){
-        int numItem,decision;
+    public static void tirarItem(Item[] items, Scanner entrada) {
+        int numItem, decision;
         System.out.println("-------------------TIRAR ITEM------------------");
-        
-        do{
+
+        do {
             System.out.println("¿Que item quieres eliminar?");
-            numItem=entrada.nextInt();
-            if(numItem<0||numItem>=contarItems(items)){
+            numItem = entrada.nextInt();
+            if (numItem < 0 || numItem > contarItems(items)) {
                 System.out.println("No hay ningun item con ese id");
             }
-        }while(numItem<0||numItem>=contarItems(items));
+        } while (numItem < 0 || numItem > contarItems(items));
         System.out.println("El item que quieres borrar es: ");
-        System.out.println("Id: " + items[numItem-1].id);
-        System.out.println("Nombre: " + items[numItem-1].name);
-        System.out.println("Descripcion: " + items[numItem-1].description);
-        System.out.println("Tipo: " + items[numItem-1].type);
-        System.out.println("Experiencia: " + items[numItem-1].experience);
-        do{
+        System.out.println("Id: " + items[numItem - 1].id);
+        System.out.println("Nombre: " + items[numItem - 1].name);
+        System.out.println("Descripcion: " + items[numItem - 1].description);
+        System.out.println("Tipo: " + items[numItem - 1].type);
+        System.out.println("Experiencia: " + items[numItem - 1].experience);
+        do {
             System.out.println("¿Estas seguro de querer eliminar este item? (No podras deshacer esta accion) 1. Si 2. No");
-            decision=entrada.nextInt();
-        }while(decision<0||decision>=items.length);
-        
-        if(decision==1){
-            if(contarItems(items) > 0){
+            decision = entrada.nextInt();
+        } while (decision < 0 || decision >= items.length);
+
+        if (decision == 1) {
+            if (contarItems(items) > 0) {
                 int tope = (contarItems(items) - 1);
                 int posicion = 0;
-                for (int m = posicion; m < tope; m++){
+                for (int m = posicion; m < tope; m++) {
                     items[m] = items[m + 1];
                 }
                 items[tope] = null;
-                if (tope ==0){
+                if (tope == 0) {
                     System.out.println("Item borrado, no te quedan items");
-                }
-                else{
+                } else {
                     System.out.println("Item borrado");
                 }
             }
-        }else{
+        } else {
             System.out.println("El item no se borrara");
         }
     }
 
-    public static void mostrarPocimaEItem(Potion[] pocion, Item[] items){
+    public static void mostrarPocimaEItem(Potion[] pocion, Item[] items) {
         System.out.println("-------------------MOSTRAR POCIMAS E ITEMS------------------");
-        
-        int menor=100,mayor=0;        
-        System.out.println("El numero de pocimas es: "+contarPociones(pocion));
-        
-        for(int k=0;k<contarPociones(pocion);k++){
-            if(pocion[k].points<menor){
-                menor=pocion[k].points;
+
+        int menor = 100, mayor = 0;
+        System.out.println("El numero de pocimas es: " + contarPociones(pocion));
+
+        for (int k = 0; k < contarPociones(pocion); k++) {
+            if (pocion[k].points < menor) {
+                menor = pocion[k].points;
             }
         }
-        System.out.println("La pocima con la puntuacion mas baja tiene "+menor+" puntos" );
-        
-        for(int k=0;k<contarPociones(pocion);k++){
-            if(pocion[k].points>mayor){
-                mayor=pocion[k].points;
+        System.out.println("La pocima con la puntuacion mas baja tiene " + menor + " puntos");
+
+        for (int k = 0; k < contarPociones(pocion); k++) {
+            if (pocion[k].points > mayor) {
+                mayor = pocion[k].points;
             }
         }
-        System.out.println("La pocima con la puntuacion mas alta tiene "+mayor+" puntos");
-        
-        for(int i=0;i<contarPociones(pocion);i++){
+        System.out.println("La pocima con la puntuacion mas alta tiene " + mayor + " puntos");
+
+        for (int i = 0; i < contarPociones(pocion); i++) {
             System.out.println("Id: " + pocion[i].id);
             System.out.println("Nombre: " + pocion[i].name);
             System.out.println("Descripcion: " + pocion[i].description);
             System.out.println("Tipo: " + pocion[i].type);
             System.out.println("Experiencia: " + pocion[i].points);
         }
-        
-        for(int j=0;j<contarItems(items);j++){
+
+        for (int j = 0; j < contarItems(items); j++) {
             System.out.println("Id: " + items[j].id);
             System.out.println("Nombre: " + items[j].name);
             System.out.println("Descripcion: " + items[j].description);
@@ -748,43 +747,43 @@ public class PracticaGrupal {
         }
     }
 
-    public static void mostrarItemsOrdenados(Item[] items, Potion[] pocion){
+    public static void mostrarItemsOrdenados(Item[] items, Potion[] pocion) {
         System.out.println("-------------------MOSTRAR ITEMS ORDENADOS------------------");
-        
+
         System.out.println("ITEMS:");
         burbujaItems(items);
         mostrarItemsAlfabeticamente(items);
         System.out.println("");
-        
+
         System.out.println("POCIONES:");
         burbujaPocimas(pocion);
         mostrarPocimasAlfabeticamente(pocion);
     }
 
-    public static void burbujaItems(Item[] items){
-        boolean ordenado=false;
-        int numIntercambios=0;
-        
-        while(!ordenado){ //bucle anidado, no sale hasta que este ordenado
-            for(int i=0;i<contarItems(items)-1;i++){
-                if (items[i].name.compareToIgnoreCase(items[i+1].name)>0){
+    public static void burbujaItems(Item[] items) {
+        boolean ordenado = false;
+        int numIntercambios = 0;
+
+        while (!ordenado) { //bucle anidado, no sale hasta que este ordenado
+            for (int i = 0; i < contarItems(items) - 1; i++) {
+                if (items[i].name.compareToIgnoreCase(items[i + 1].name) > 0) {
                     //se cambian los valores usando un auxiliar
-                    String aux=items[i].name;
-                    items[i].name=items[i+1].name;
-                    items[i+1].name=aux;
+                    String aux = items[i].name;
+                    items[i].name = items[i + 1].name;
+                    items[i + 1].name = aux;
                     numIntercambios++; //se incrementan los cambios
                 }
             }
-            if (numIntercambios==0){ //si cambios=0 --> esta ordenado
-                ordenado=true;
+            if (numIntercambios == 0) { //si cambios=0 --> esta ordenado
+                ordenado = true;
             }
-            numIntercambios=0; //se vuelven a inicializar el numero de cambios y vuelve a empezar
+            numIntercambios = 0; //se vuelven a inicializar el numero de cambios y vuelve a empezar
         }
- 
+
     }
-    
-    public static void mostrarItemsAlfabeticamente(Item[] items){
-        for(int i=0;i<contarItems(items);i++){
+
+    public static void mostrarItemsAlfabeticamente(Item[] items) {
+        for (int i = 0; i < contarItems(items); i++) {
             System.out.println("Id: " + items[i].id);
             System.out.println("Nombre: " + items[i].name);
             System.out.println("Descripcion: " + items[i].description);
@@ -792,31 +791,31 @@ public class PracticaGrupal {
             System.out.println("Experiencia: " + items[i].experience);
         }
     }
-    
-    public static void burbujaPocimas(Potion[] pocion){
-        boolean ordenado=false;
-        int numIntercambios=0;
-        
-        while(!ordenado){
-            for(int i=0;i<contarPociones(pocion)-1;i++){
-                if (pocion[i].name.compareToIgnoreCase(pocion[i+1].name)>0){
-                    
-                    String aux=pocion[i].name;
-                    pocion[i].name=pocion[i+1].name;
-                    pocion[i+1].name=aux;
+
+    public static void burbujaPocimas(Potion[] pocion) {
+        boolean ordenado = false;
+        int numIntercambios = 0;
+
+        while (!ordenado) {
+            for (int i = 0; i < contarPociones(pocion) - 1; i++) {
+                if (pocion[i].name.compareToIgnoreCase(pocion[i + 1].name) > 0) {
+
+                    String aux = pocion[i].name;
+                    pocion[i].name = pocion[i + 1].name;
+                    pocion[i + 1].name = aux;
                     numIntercambios++;
                 }
             }
-            if (numIntercambios==0){
-                ordenado=true;
+            if (numIntercambios == 0) {
+                ordenado = true;
             }
-            numIntercambios=0;
+            numIntercambios = 0;
         }
- 
+
     }
-    
-    public static void mostrarPocimasAlfabeticamente(Potion[] pocion){
-        for(int i=0;i<contarPociones(pocion);i++){
+
+    public static void mostrarPocimasAlfabeticamente(Potion[] pocion) {
+        for (int i = 0; i < contarPociones(pocion); i++) {
             System.out.println("Id: " + pocion[i].id);
             System.out.println("Nombre: " + pocion[i].name);
             System.out.println("Descripcion: " + pocion[i].description);
@@ -993,7 +992,7 @@ public class PracticaGrupal {
 
         if (selec == 1) {
             try {
-                File myObj = new File("E:\\CAP\\pocimas.txt");
+                File myObj = new File("pocimas.txt");
                 Scanner reader = new Scanner(myObj);
                 while (reader.hasNextLine()) {
                     String data = reader.nextLine();
@@ -1009,7 +1008,7 @@ public class PracticaGrupal {
 
         if (selec == 2) {
             try {
-                File myObj = new File("E:\\CAP\\items.txt");
+                File myObj = new File("items.txt");
                 Scanner reader = new Scanner(myObj);
                 while (reader.hasNextLine()) {
                     String data = reader.nextLine();
@@ -1025,7 +1024,7 @@ public class PracticaGrupal {
 
         if (selec == 3) {
             try {
-                File myObj = new File("E:\\CAP\\ambos.txt");
+                File myObj = new File("ambos.txt");
                 Scanner reader = new Scanner(myObj);
                 while (reader.hasNextLine()) {
                     String data = reader.nextLine();
@@ -1049,13 +1048,13 @@ public class PracticaGrupal {
 
         System.out.println("-----------------------");
         do {
-            System.out.println("¿Que desea guardar?:1-Pocimas, 2-Items, 3-Ambos");
+            System.out.println("¿Que desea guardar?:1-Pocimas, 2-Items");
             selec = ent.nextInt();
         } while (selec < 1 || selec > 3);
 
         if (selec == 1) {
             try {
-                FileOutputStream out = new FileOutputStream(new File("E:\\CAP\\pocimas.dat"));
+                FileOutputStream out = new FileOutputStream(new File("pocimas.dat"));
                 ObjectOutputStream pocimas = new ObjectOutputStream(out);
                 //creo el fichero de texto pjpocimas  
 
@@ -1068,6 +1067,7 @@ public class PracticaGrupal {
                     }
                 }
                 pocimas.close();
+                System.out.println("Fichero bien escrito");
             } catch (FileNotFoundException e) {
                 System.out.println("Fichero no encontrado");
             } catch (IOException exc) {
@@ -1077,7 +1077,7 @@ public class PracticaGrupal {
         } else if (selec == 2) {
             try {
                 //mismo porceso que en las pocimas 
-                FileOutputStream out = new FileOutputStream(new File("E:\\CAP\\items.dat"));
+                FileOutputStream out = new FileOutputStream(new File("items.dat"));
                 ObjectOutputStream it = new ObjectOutputStream(out);
 
                 it.writeInt(contarItems(items));
@@ -1088,6 +1088,7 @@ public class PracticaGrupal {
                     }
                 }
                 it.close();
+                System.out.println("Fichero bien escrito");
             } catch (FileNotFoundException e) {
                 System.out.println("Fichero no encontrado");
             } catch (IOException exc) {
@@ -1105,24 +1106,16 @@ public class PracticaGrupal {
         } while (selec < 1 || selec > 3);
 
         if (selec == 1) {
-            int tope = 0;
-            int longitud = 0;
             String name = null;
             String description = null;
             int id;
             int type;
             int points;
             int i = 0;
-            //pocion[i] = new Potion();
 
             try {
-                FileInputStream in = new FileInputStream(new File("E:\\CAP\\pocimas.dat"));
+                FileInputStream in = new FileInputStream(new File("pocimas.dat"));
                 ObjectInputStream pocimas = new ObjectInputStream(in);
-
-                longitud = pocimas.readInt(); //Leemos la referencia para saber hasta donde leer
-                tope = longitud;
-                System.out.println("Tope: " + tope);
-                System.out.println("Longitud: " + longitud);
                 Potion a1 = (Potion) pocimas.readObject();
 
                 while (a1 != null) {
@@ -1163,29 +1156,20 @@ public class PracticaGrupal {
             } catch (NullPointerException nll) {
                 System.out.println("Apuntas a la nada. " + nll);
             }
-            tope = longitud;
-            //return tope;
         }
 
         if (selec == 2) {
-            int tope = 0;
-            int longitud = 0;
             String name = null;
             String description = null;
             int id;
             int type;
             int experience;
             int i = 0;
-            //pocion[i] = new Potion();
 
             try {
-                FileInputStream in = new FileInputStream(new File("E:\\CAP\\items.dat"));
+                FileInputStream in = new FileInputStream(new File("items.dat"));
                 ObjectInputStream it = new ObjectInputStream(in);
 
-                longitud = it.readInt(); //Leemos la referencia para saber hasta donde leer
-                tope = longitud;
-                System.out.println("Tope: " + tope);
-                System.out.println("Longitud: " + longitud);
                 Item a1 = (Item) it.readObject();
 
                 while (a1 != null) {
@@ -1225,8 +1209,6 @@ public class PracticaGrupal {
             } catch (NullPointerException nll) {
                 System.out.println("Apuntas a la nada. " + nll);
             }
-            tope = longitud;
-            //return tope;
         }
     }
 }
