@@ -1,0 +1,51 @@
+Id: 2
+Nombre: Invisivilidad
+Descripcion: Un veneno
+Tipo: 3
+Experiencia: 25
+Id: 5
+Nombre: Veneno
+Descripcion: Un veneno
+Tipo: 3
+Experiencia: 20
+Id: 4
+Nombre: Veneno
+Descripcion: Una pocion de invisivilidad
+Tipo: 2
+Experiencia: 30
+Id: 1
+Nombre: Vida
+Descripcion: Cura 10 PV
+Tipo: 1
+Experiencia: 10
+Id: 3
+Nombre: Antidoto
+Descripcion: Antidoto para veneno
+Tipo: 1
+Experiencia: 15
+---------------
+Id: 1
+Nombre: Espada
+Descripcion: Una espada
+Tipo: 2
+Experiencia: 25
+Id: 2
+Nombre: Botas
+Descripcion: Unas botas de viaje
+Tipo: 3
+Experiencia: 15
+Id: 3
+Nombre: Armadura
+Descripcion: Una armadura de cuero
+Tipo: 3
+Experiencia: 30
+Id: 4
+Nombre: Saco
+Descripcion: Un saco de dormir
+Tipo: 1
+Experiencia: 15
+Id: 5
+Nombre: Mapa
+Descripcion: Un mapa de la region
+Tipo: 1
+Experiencia: 15
