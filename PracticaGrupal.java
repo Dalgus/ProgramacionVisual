@@ -119,7 +119,6 @@ public class PracticaGrupal {
     public static void main(String[] args) throws IOException {
         final int MAXPOTIONS = 10;
         final int MAXITEMS = 5;
-        // TODO code application logic here
         Scanner entrada = new Scanner(System.in);
         //Se definen 10 pocimas como máximo
         Potion[] pocima = new Potion[MAXPOTIONS];
@@ -729,21 +728,25 @@ public class PracticaGrupal {
             }
         }
         System.out.println("La pocima con la puntuacion mas alta tiene " + mayor + " puntos");
-
+        System.out.println("");
+        System.out.println("POCIONES:");
         for (int i = 0; i < contarPociones(pocion); i++) {
             System.out.println("Id: " + pocion[i].id);
             System.out.println("Nombre: " + pocion[i].name);
             System.out.println("Descripcion: " + pocion[i].description);
             System.out.println("Tipo: " + pocion[i].type);
             System.out.println("Experiencia: " + pocion[i].points);
+            System.out.println("------------------");
         }
-
+        System.out.println("");
+        System.out.println("ITEMS:");
         for (int j = 0; j < contarItems(items); j++) {
             System.out.println("Id: " + items[j].id);
             System.out.println("Nombre: " + items[j].name);
             System.out.println("Descripcion: " + items[j].description);
             System.out.println("Tipo: " + items[j].type);
             System.out.println("Experiencia: " + items[j].experience);
+            System.out.println("------------------");
         }
     }
 
@@ -789,6 +792,7 @@ public class PracticaGrupal {
             System.out.println("Descripcion: " + items[i].description);
             System.out.println("Tipo: " + items[i].type);
             System.out.println("Experiencia: " + items[i].experience);
+            System.out.println("------------------");
         }
     }
 
@@ -821,6 +825,7 @@ public class PracticaGrupal {
             System.out.println("Descripcion: " + pocion[i].description);
             System.out.println("Tipo: " + pocion[i].type);
             System.out.println("Experiencia: " + pocion[i].points);
+            System.out.println("------------------");
         }
     }
 
@@ -953,7 +958,7 @@ public class PracticaGrupal {
                 //mismo proceso pero con ambos   
                 PrintStream ambos;
                 ambos = new PrintStream(new FileOutputStream("ambos.txt"));
-
+                ambos.println("POCIMAS");
                 for (int i = 0; i < MAXPOTIONS; i++) {
                     if (pocion[i] != null) {
                         ambos.println("Id: " + pocion[i].id);
@@ -961,10 +966,11 @@ public class PracticaGrupal {
                         ambos.println("Descripcion: " + pocion[i].description);
                         ambos.println("Tipo: " + pocion[i].type);
                         ambos.println("Experiencia: " + pocion[i].points);
+                        ambos.println("---------------");
                     }
                 }
                 ambos.println("---------------");
-
+                ambos.println("ITEMS");
                 for (int i = 0; i < MAXITEMS; i++) {
                     if (items[i] != null) {
                         ambos.println("Id: " + items[i].id);
@@ -972,6 +978,7 @@ public class PracticaGrupal {
                         ambos.println("Descripcion: " + items[i].description);
                         ambos.println("Tipo: " + items[i].type);
                         ambos.println("Experiencia: " + items[i].experience);
+                        ambos.println("---------------");
                     }
                 }
             } catch (FileNotFoundException e) {
