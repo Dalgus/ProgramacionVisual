@@ -913,7 +913,7 @@ public class PracticaGrupal {
             try {
                 //creo el fichero de texto pjpocimas  
                 PrintStream pocimas;
-                pocimas = new PrintStream(new FileOutputStream("E:\\CAP\\pocimas.txt"));
+                pocimas = new PrintStream(new FileOutputStream("pocimas.txt"));
                 //recorro el registro en la posicion i, y los escribo en el .txt que he creado
                 for (int i = 0; i < MAXPOTIONS; i++) {
                     if (pocion[i] != null) {
@@ -933,7 +933,7 @@ public class PracticaGrupal {
             try {
                 //mismo porceso que en las pocimas  
                 PrintStream it;
-                it = new PrintStream(new FileOutputStream("E:\\CAP\\items.txt"));
+                it = new PrintStream(new FileOutputStream("items.txt"));
 
                 for (int i = 0; i < MAXITEMS; i++) {
                     if (items[i] != null) {
@@ -952,7 +952,7 @@ public class PracticaGrupal {
             try {
                 //mismo proceso pero con ambos   
                 PrintStream ambos;
-                ambos = new PrintStream(new FileOutputStream("E:\\CAP\\ambos.txt"));
+                ambos = new PrintStream(new FileOutputStream("ambos.txt"));
 
                 for (int i = 0; i < MAXPOTIONS; i++) {
                     if (pocion[i] != null) {
@@ -1060,7 +1060,7 @@ public class PracticaGrupal {
 
                 pocimas.writeInt(contarPociones(pocion));  //Conseguimos una referencia para la lectura
 
-                //recorro el registro en la posicion i, y los escribo en el .txt que he creado
+                //recorro el registro en la posicion i, y los escribo en el .dat que he creado
                 for (int i = 0; i < MAXPOTIONS; i++) {
                     if (pocion[i] != null) {
                         pocimas.writeObject(pocion[i]);
