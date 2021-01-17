@@ -1,4 +1,4 @@
-package PracticaGrupal;
+package rpg;
 
 import java.util.Scanner;
 import java.io.*;
@@ -114,11 +114,12 @@ class Item implements Serializable {
 
 }
 
-public class PracticaGrupal {
+public class rpg {
 
     public static void main(String[] args) throws IOException {
         final int MAXPOTIONS = 10;
         final int MAXITEMS = 5;
+        // TODO code application logic here
         Scanner entrada = new Scanner(System.in);
         //Se definen 10 pocimas como máximo
         Potion[] pocima = new Potion[MAXPOTIONS];
@@ -728,25 +729,21 @@ public class PracticaGrupal {
             }
         }
         System.out.println("La pocima con la puntuacion mas alta tiene " + mayor + " puntos");
-        System.out.println("");
-        System.out.println("POCIONES:");
+
         for (int i = 0; i < contarPociones(pocion); i++) {
             System.out.println("Id: " + pocion[i].id);
             System.out.println("Nombre: " + pocion[i].name);
             System.out.println("Descripcion: " + pocion[i].description);
             System.out.println("Tipo: " + pocion[i].type);
             System.out.println("Experiencia: " + pocion[i].points);
-            System.out.println("------------------");
         }
-        System.out.println("");
-        System.out.println("ITEMS:");
+
         for (int j = 0; j < contarItems(items); j++) {
             System.out.println("Id: " + items[j].id);
             System.out.println("Nombre: " + items[j].name);
             System.out.println("Descripcion: " + items[j].description);
             System.out.println("Tipo: " + items[j].type);
             System.out.println("Experiencia: " + items[j].experience);
-            System.out.println("------------------");
         }
     }
 
@@ -792,7 +789,6 @@ public class PracticaGrupal {
             System.out.println("Descripcion: " + items[i].description);
             System.out.println("Tipo: " + items[i].type);
             System.out.println("Experiencia: " + items[i].experience);
-            System.out.println("------------------");
         }
     }
 
@@ -825,7 +821,6 @@ public class PracticaGrupal {
             System.out.println("Descripcion: " + pocion[i].description);
             System.out.println("Tipo: " + pocion[i].type);
             System.out.println("Experiencia: " + pocion[i].points);
-            System.out.println("------------------");
         }
     }
 
@@ -958,7 +953,7 @@ public class PracticaGrupal {
                 //mismo proceso pero con ambos   
                 PrintStream ambos;
                 ambos = new PrintStream(new FileOutputStream("ambos.txt"));
-                ambos.println("POCIMAS");
+
                 for (int i = 0; i < MAXPOTIONS; i++) {
                     if (pocion[i] != null) {
                         ambos.println("Id: " + pocion[i].id);
@@ -970,7 +965,7 @@ public class PracticaGrupal {
                     }
                 }
                 ambos.println("---------------");
-                ambos.println("ITEMS");
+
                 for (int i = 0; i < MAXITEMS; i++) {
                     if (items[i] != null) {
                         ambos.println("Id: " + items[i].id);
@@ -978,7 +973,6 @@ public class PracticaGrupal {
                         ambos.println("Descripcion: " + items[i].description);
                         ambos.println("Tipo: " + items[i].type);
                         ambos.println("Experiencia: " + items[i].experience);
-                        ambos.println("---------------");
                     }
                 }
             } catch (FileNotFoundException e) {
@@ -1057,7 +1051,7 @@ public class PracticaGrupal {
         do {
             System.out.println("¿Que desea guardar?:1-Pocimas, 2-Items");
             selec = ent.nextInt();
-        } while (selec < 1 || selec > 3);
+        } while (selec < 1 || selec > 2);
 
         if (selec == 1) {
             try {
@@ -1065,8 +1059,7 @@ public class PracticaGrupal {
                 ObjectOutputStream pocimas = new ObjectOutputStream(out);
                 //creo el fichero de texto pjpocimas  
 
-                pocimas.writeInt(contarPociones(pocion));  //Conseguimos una referencia para la lectura
-
+                //pocimas.writeInt(contarPociones(pocion));  //Conseguimos una referencia para la lectura
                 //recorro el registro en la posicion i, y los escribo en el .dat que he creado
                 for (int i = 0; i < MAXPOTIONS; i++) {
                     if (pocion[i] != null) {
@@ -1074,6 +1067,7 @@ public class PracticaGrupal {
                     }
                 }
                 pocimas.close();
+
                 System.out.println("Fichero bien escrito");
             } catch (FileNotFoundException e) {
                 System.out.println("Fichero no encontrado");
@@ -1087,8 +1081,7 @@ public class PracticaGrupal {
                 FileOutputStream out = new FileOutputStream(new File("items.dat"));
                 ObjectOutputStream it = new ObjectOutputStream(out);
 
-                it.writeInt(contarItems(items));
-
+                //it.writeInt(contarItems(items));
                 for (int i = 0; i < MAXITEMS; i++) {
                     if (items[i] != null) {
                         it.writeObject(items[i]);
@@ -1096,6 +1089,7 @@ public class PracticaGrupal {
                 }
                 it.close();
                 System.out.println("Fichero bien escrito");
+
             } catch (FileNotFoundException e) {
                 System.out.println("Fichero no encontrado");
             } catch (IOException exc) {
@@ -1110,7 +1104,7 @@ public class PracticaGrupal {
         do {
             System.out.println("¿Que desea leer?:1-Pocimas, 2-Items");
             selec = ent.nextInt();
-        } while (selec < 1 || selec > 3);
+        } while (selec < 1 || selec > 2);
 
         if (selec == 1) {
             String name = null;
@@ -1141,6 +1135,8 @@ public class PracticaGrupal {
 
                     points = a1.points;
                     System.out.println("Los puntos de la pocion " + (i + 1) + " son: " + points);
+
+                    System.out.println("------------------");
 
                     //Ahora que ya leemos habría que copiarlo al array que ya tenemos
                     pocion[i] = new Potion(name, description, id, type, points);
@@ -1182,7 +1178,7 @@ public class PracticaGrupal {
                 while (a1 != null) {
 
                     id = a1.id;
-                    System.out.println("El identificador del item " + (i + 1) + " es: " + id);
+                    System.out.println("El identificador del objeto " + (i + 1) + " es: " + id);
 
                     name = a1.name;
                     System.out.println("El nombre del objeto " + (i + 1) + " es: " + name);
@@ -1194,7 +1190,9 @@ public class PracticaGrupal {
                     System.out.println("El tipo del objeto " + (i + 1) + " es: " + type);
 
                     experience = a1.experience;
-                    System.out.println("Los puntos de la pocion " + (i + 1) + " son: " + experience);
+                    System.out.println("Los puntos de experiencia del objeto " + (i + 1) + " son: " + experience);
+
+                    System.out.println("------------------");
 
                     //Ahora que ya leemos habría que copiarlo al array que ya tenemos
                     items[i] = new Item(name, description, id, type, experience);
@@ -1219,3 +1217,4 @@ public class PracticaGrupal {
         }
     }
 }
+
