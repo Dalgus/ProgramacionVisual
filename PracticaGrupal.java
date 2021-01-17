@@ -729,21 +729,25 @@ public class rpg {
             }
         }
         System.out.println("La pocima con la puntuacion mas alta tiene " + mayor + " puntos");
-
+        
+        System.out.println("POCIONES:");
         for (int i = 0; i < contarPociones(pocion); i++) {
             System.out.println("Id: " + pocion[i].id);
             System.out.println("Nombre: " + pocion[i].name);
             System.out.println("Descripcion: " + pocion[i].description);
             System.out.println("Tipo: " + pocion[i].type);
             System.out.println("Experiencia: " + pocion[i].points);
+            System.out.println("-----------------------");
         }
-
+        System.out.println("");
+        System.out.println("ITEMS:");
         for (int j = 0; j < contarItems(items); j++) {
             System.out.println("Id: " + items[j].id);
             System.out.println("Nombre: " + items[j].name);
             System.out.println("Descripcion: " + items[j].description);
             System.out.println("Tipo: " + items[j].type);
             System.out.println("Experiencia: " + items[j].experience);
+            System.out.println("-----------------------");
         }
     }
 
@@ -789,6 +793,7 @@ public class rpg {
             System.out.println("Descripcion: " + items[i].description);
             System.out.println("Tipo: " + items[i].type);
             System.out.println("Experiencia: " + items[i].experience);
+            System.out.println("-----------------------");
         }
     }
 
@@ -821,6 +826,7 @@ public class rpg {
             System.out.println("Descripcion: " + pocion[i].description);
             System.out.println("Tipo: " + pocion[i].type);
             System.out.println("Experiencia: " + pocion[i].points);
+            System.out.println("-----------------------");
         }
     }
 
@@ -828,7 +834,7 @@ public class rpg {
         Scanner ent = new Scanner(System.in);
         //variables para recoger los numeros por teclado
         int op, num;
-        System.out.println("------------------------------");
+        System.out.println("------------BUSCAR------------------");
         do {
             System.out.println("¿Qué deseas buscar?:1- Pocima, 2- Item ");
             op = ent.nextInt();
@@ -903,7 +909,7 @@ public class rpg {
         final int MAXITEMS = 5;
         int selec;
 
-        System.out.println("-----------------------");
+        System.out.println("-----------GUARDAR FICHEROS TXT------------");
         do {
             System.out.println("¿Que desea guardar?:1-Pocimas, 2-Items, 3-Ambos");
             selec = ent.nextInt();
@@ -953,7 +959,7 @@ public class rpg {
                 //mismo proceso pero con ambos   
                 PrintStream ambos;
                 ambos = new PrintStream(new FileOutputStream("ambos.txt"));
-
+                ambos.println("PÓCIMAS");
                 for (int i = 0; i < MAXPOTIONS; i++) {
                     if (pocion[i] != null) {
                         ambos.println("Id: " + pocion[i].id);
@@ -964,8 +970,8 @@ public class rpg {
                         ambos.println("---------------");
                     }
                 }
-                ambos.println("---------------");
-
+                ambos.println("-------------------------------");
+                ambos.println("ITEMS");
                 for (int i = 0; i < MAXITEMS; i++) {
                     if (items[i] != null) {
                         ambos.println("Id: " + items[i].id);
@@ -973,6 +979,7 @@ public class rpg {
                         ambos.println("Descripcion: " + items[i].description);
                         ambos.println("Tipo: " + items[i].type);
                         ambos.println("Experiencia: " + items[i].experience);
+                        ambos.println("---------------");
                     }
                 }
             } catch (FileNotFoundException e) {
@@ -985,6 +992,7 @@ public class rpg {
 
     public static void leerFicheros() {
         Scanner ent = new Scanner(System.in);
+        System.out.println("------------LEER FICHEROS TXT----------");
         int selec;
         do {
             System.out.println("¿Que desea leer?:1-Pocimas, 2-Items, 3-Ambos");
@@ -1047,7 +1055,7 @@ public class rpg {
         final int MAXITEMS = 5;
         int selec;
 
-        System.out.println("-----------------------");
+        System.out.println("-----------GUARDAR FICHEROS DAT------------");
         do {
             System.out.println("¿Que desea guardar?:1-Pocimas, 2-Items");
             selec = ent.nextInt();
@@ -1100,6 +1108,7 @@ public class rpg {
 
     public static void leerFicherosDat(Potion[] pocion, Item[] items) throws FileNotFoundException, IOException {
         Scanner ent = new Scanner(System.in);
+        System.out.println("----------------LEER FICHERO DAT---------------");
         int selec;
         do {
             System.out.println("¿Que desea leer?:1-Pocimas, 2-Items");
@@ -1217,4 +1226,3 @@ public class rpg {
         }
     }
 }
-
