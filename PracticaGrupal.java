@@ -730,10 +730,10 @@ public class PracticaGrupal {
             }
         }
         System.out.println("La pocima con la puntuacion mas alta tiene "+mayor+" puntos");
-        //ERROR A PARTIR DE AQUI
+        
         for(int i=0;i<contarPociones(pocion);i++){
             System.out.println("Id: " + pocion[i].id);
-            System.out.println("Nombre: " + pocion[i].nombre);
+            System.out.println("Nombre: " + pocion[i].name);
             System.out.println("Descripcion: " + pocion[i].description);
             System.out.println("Tipo: " + pocion[i].type);
             System.out.println("Experiencia: " + pocion[i].points);
@@ -799,11 +799,11 @@ public class PracticaGrupal {
         
         while(!ordenado){
             for(int i=0;i<contarPociones(pocion)-1;i++){
-                if (pocion[i].nombre.compareToIgnoreCase(pocion[i+1].nombre)>0){
+                if (pocion[i].name.compareToIgnoreCase(pocion[i+1].name)>0){
                     
-                    String aux=pocion[i].nombre;
-                    pocion[i].nombre=pocion[i+1].nombre;
-                    pocion[i+1].nombre=aux;
+                    String aux=pocion[i].name;
+                    pocion[i].name=pocion[i+1].name;
+                    pocion[i+1].name=aux;
                     numIntercambios++;
                 }
             }
@@ -818,7 +818,7 @@ public class PracticaGrupal {
     public static void mostrarPocimasAlfabeticamente(Potion[] pocion){
         for(int i=0;i<contarPociones(pocion);i++){
             System.out.println("Id: " + pocion[i].id);
-            System.out.println("Nombre: " + pocion[i].nombre);
+            System.out.println("Nombre: " + pocion[i].name);
             System.out.println("Descripcion: " + pocion[i].description);
             System.out.println("Tipo: " + pocion[i].type);
             System.out.println("Experiencia: " + pocion[i].points);
